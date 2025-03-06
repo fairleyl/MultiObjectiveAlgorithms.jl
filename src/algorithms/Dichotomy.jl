@@ -106,11 +106,11 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
         (a, b) = popfirst!(queue)
         y_d = abs.(solutions[a].y .- solutions[b].y)
         w = y_d[2] / (y_d[2] + y_d[1])
-
-	status = 0
-	solution = 0
-	try
-            status, solution = _solve_weighted_sum(model, algorithm, w)
+        P = (1-w)/w
+	    status = 0
+	    solution = 0
+	    try
+            status, solution = _solve_weighted_sum(model, algorithm, [1.0, P])
         catch e
             continue
         end
