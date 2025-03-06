@@ -106,10 +106,15 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
         (a, b) = popfirst!(queue)
         y_d = abs.(solutions[a].y .- solutions[b].y)
         w = y_d[2] / (y_d[2] + y_d[1])
-        if w==NaN
-            w = exp(log(y_d[2]) - log(y_d[2] + y_d[1]))
-        end 
-        status, solution = _solve_weighted_sum(model, algorithm, w)
+
+	status = 0
+	solution = 0
+	try
+            status, solution = _solve_weighted_sum(model, algorithm, w)
+        catch e
+            continue
+        end
+        
         if !_is_scalar_status_optimal(status)
             # Exit the solve with some error.
             return status, nothing
