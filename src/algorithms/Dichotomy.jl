@@ -112,7 +112,8 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
 	    try
             status, solution = _solve_weighted_sum(model, algorithm, [1.0, P])
         catch e
-            continue
+            status = MOI.OPTIMAL
+            solution = solutions[a]
         end
         
         if !_is_scalar_status_optimal(status)
