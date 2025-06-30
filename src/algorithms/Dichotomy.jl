@@ -110,6 +110,10 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
         println("-------------------")
         y_d = solutions[a].y .- solutions[b].y
         w = y_d[2] / (y_d[2] - y_d[1])
+        if w < a || w > b 
+            continue 
+        end
+        
         P = (1-w)/w
 	    status = 0
 	    solution = 0
