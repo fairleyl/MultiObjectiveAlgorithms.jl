@@ -116,7 +116,9 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
             solution = solutions[a]
         end
         
-        if !_is_scalar_status_optimal(status)
+        if status == MOI.TIME_LIMIT
+        	break
+        elseif !_is_scalar_status_optimal(status)
             # Exit the solve with some error.
             return status, nothing
         elseif solution ≈ solutions[a] || solution ≈ solutions[b]
