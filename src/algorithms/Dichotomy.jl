@@ -104,10 +104,10 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
             break
         end
         (a, b) = popfirst!(queue)
-        println("-------------------")
-        print("DICHOTOMY NODE: ")
-        println((a,b))
-        println("-------------------")
+        # println("-------------------")
+        # print("DICHOTOMY NODE: ")
+        # println((a,b))
+        # println("-------------------")
         y_d = solutions[a].y .- solutions[b].y
         w = y_d[2] / (y_d[2] - y_d[1])
         if w < a || w > b 
