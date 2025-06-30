@@ -108,8 +108,8 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
         print("DICHOTOMY NODE: ")
         println((a,b))
         println("-------------------")
-        y_d = abs.(solutions[a].y .- solutions[b].y)
-        w = y_d[2] / (y_d[2] + y_d[1])
+        y_d = solutions[a].y .- solutions[b].y
+        w = y_d[2] / (y_d[2] - y_d[1])
         P = (1-w)/w
 	    status = 0
 	    solution = 0
