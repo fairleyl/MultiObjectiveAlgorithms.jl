@@ -14,7 +14,7 @@ struct SolutionPoint
 end
 
 function Base.isapprox(a::SolutionPoint, b::SolutionPoint; kwargs...)
-    return isapprox(a.y, b.y; kwargs...)
+    return isapprox(a.y, b.y; kwargs...) || a.x == b.x
 end
 
 Base.:(==)(a::SolutionPoint, b::SolutionPoint) = a.y == b.y
