@@ -121,7 +121,7 @@ function optimize_multiobjective!(algorithm::Dichotomy, model::Optimizer)
         elseif !_is_scalar_status_optimal(status)
             # Exit the solve with some error.
             return status, nothing
-        elseif solution ≈ solutions[a] || solution ≈ solutions[b]
+        elseif solution ≈ solutions[a] || solution ≈ solutions[b] || solutions[a] ≈ solutions[b]
             # We have found an existing solution. We're free to prune (a, b)
             # from the search space.
         else
